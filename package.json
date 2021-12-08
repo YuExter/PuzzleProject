@@ -1,0 +1,14 @@
+{
+  "name": "puzzleproject",
+  "version": "1.0.0",
+  "description": "Small project for Nicolay's birthday",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "prebuild": "npx rimraf build",
+    "build": "parcel build --public-url ./ ./src/index.html --experimental-scope-hoisting --out-dir build"
+  },
+  "dependencies": {
+    "parcel": "^2.0.1"
+  },
+  "devDependencies": {}
+}
