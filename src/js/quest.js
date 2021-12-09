@@ -48,8 +48,7 @@ export class Quest {
       }
 
       this.nextStep();
-
-      console.log('variantValue', variantValue);
+      setTimeout(() => this.resetValidation(this.variantInput), 1000);
     });
   }
 
@@ -87,5 +86,15 @@ export class Quest {
 
   isLastStep() {
     return this.step === this.rebuses.length;
+  }
+
+  resetValidation(element) {
+    if (!element) {
+      return;
+    }
+
+    element.classList.remove('is-valid');
+    element.classList.remove('is-invalid');
+    this.isValidAnswer = false;
   }
 }
