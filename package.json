@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "Small project for Nicolay's birthday",
   "scripts": {
-    "dev": "parcel ./src/index.html",
-    "prebuild": "npx rimraf build",
-    "build": "parcel build --public-url ./ ./src/index.html --experimental-scope-hoisting --out-dir build"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url /PuzzleProject/ --no-content-hash",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
+    "gh-pages": "^3.2.3",
     "parcel": "^2.0.1"
   },
   "devDependencies": {}
