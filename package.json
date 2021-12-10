@@ -8,8 +8,9 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "gh-pages": "^3.2.3",
     "parcel": "^2.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  }
 }
