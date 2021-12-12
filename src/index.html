@@ -9,27 +9,46 @@
 </head>
 <body>
 <main class="container">
-    <div class="row mt-5">
-        <img id="rebus-image" class="rounded img-fluid" src="../assets/puzzle1.png" width="760" height="230" alt="img">
+    <div id="start-btn" class="position-fixed top-50 start-50 translate-middle">
+        <button type="button" class="btn btn-primary btn-lg">Start quest!</button>
     </div>
 
-    <div class="row mt-5">
-        <form id="quest-form" enctype="multipart/form-data" method="post">
-            <div class="mb-3">
-                <label for="variant-field" class="form-label">Your answer</label>
-                <div class="input-group has-validation">
-                    <input type="text" class="form-control" id="variant-field" name="variant">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please fill another answer.
+    <div id="quest" class="invisible mt-3">
+        <h6 class="display-6 text-end" id="countdown">02:00</h6>
+
+        <div class="row mt-5">
+            <img id="rebus-image" class="rounded img-fluid" src="../assets/puzzle1.png" width="760" height="230"
+                 alt="img">
+        </div>
+
+        <div class="row mt-5">
+            <form id="quest-form" enctype="multipart/form-data" method="post">
+                <div class="mb-3">
+                    <label for="variant-field" class="form-label">Your answer</label>
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control" id="variant-field" name="variant">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please fill another answer.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary">Check</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Check</button>
+            </form>
+        </div>
+
+        <ul id="answers" class="row mt-2"></ul>
+    </div>
+
+    <div id="wasted" class="invisible position-fixed top-50 start-50 translate-middle">
+        <img class="rounded img-fluid" src="../assets/wasted.png" width="760" height="230"
+             alt="img">
+    </div>
+
+    <div id="success" class="w-100 position-fixed top-50 start-50 translate-middle text-center">
     </div>
 </main>
 
