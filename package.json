@@ -4,7 +4,7 @@
   "description": "Small project for Nicolay's birthday",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --dist-dir docs"
+    "build": "rm -rf ./.parcel-cache && rm -rf ./docs && parcel build src/index.html --dist-dir docs"
   },
   "dependencies": {
     "parcel": "^2.0.1"
