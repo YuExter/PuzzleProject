@@ -86,7 +86,7 @@ export class Quest {
       event.preventDefault();
 
       const formData = new FormData(event.target);
-      const variantValue = formData.fd.get('variant');
+      const variantValue = formData.get('variant');
 
       if (!this.variantInput) {
         return;
