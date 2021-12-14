@@ -11,7 +11,7 @@ export class Quest {
     this.rebusImage = null;
     this.form = null;
     this.variantInput = null;
-    this.answersWrapper = null;
+    this.progressWrapper = null;
     this.wastedWrapper = null;
     this.successWrapper = null;
     this.step = 0;
@@ -27,7 +27,7 @@ export class Quest {
     const rebusImage = document.getElementById('rebus-image');
     const form = document.getElementById('quest-form');
     const variantInput = document.getElementById('variant-field');
-    const answersWrapper = document.getElementById('answers');
+    const progressWrapper = document.getElementById('progress');
     const wastedWrapper = document.getElementById('wasted');
     const successWrapper = document.getElementById('success');
 
@@ -38,7 +38,7 @@ export class Quest {
     this.rebusImage = rebusImage;
     this.form = form;
     this.variantInput = variantInput;
-    this.answersWrapper = answersWrapper;
+    this.progressWrapper = progressWrapper;
     this.wastedWrapper = wastedWrapper;
     this.successWrapper = successWrapper;
 
@@ -47,6 +47,7 @@ export class Quest {
 
   start() {
     this.subscribeStartButton();
+    this.updateProgressBar();
     this.subscribeOnFormChange();
     this.subscribeTimeEnd();
   }
@@ -86,7 +87,7 @@ export class Quest {
       event.preventDefault();
 
       const formData = new FormData(event.target);
-      const variantValue = formData.get('variant');
+      const variantValue = formData.fd.get('variant');
 
       if (!this.variantInput) {
         return;
@@ -104,7 +105,7 @@ export class Quest {
   }
 
   validateAnswerField(value) {
-    if (value !== this.rebuses[this.step].answer) {
+    if (value.toLowerCase() !== this.rebuses[this.step].answer) {
       this.variantInput.classList.remove('is-valid');
       this.variantInput.classList.add('is-invalid');
 
@@ -118,9 +119,9 @@ export class Quest {
   }
 
   nextStep() {
-    this.displayRightAnswer();
-    this.variantInput.value = '';
+    this.resetVariantInputValue();
     this.step += 1;
+    this.updateProgressBar();
 
     if (this.isLastStep()) {
       this.timer.stop();
@@ -131,6 +132,14 @@ export class Quest {
     }
 
     this.nextRebus();
+  }
+
+  resetVariantInputValue() {
+    if (!this.variantInput) {
+      return;
+    }
+
+    this.variantInput.value = '';
   }
 
   nextRebus() {
@@ -153,14 +162,6 @@ export class Quest {
     element.classList.remove('is-valid');
     element.classList.remove('is-invalid');
     this.isValidAnswer = false;
-  }
-
-  displayRightAnswer() {
-    const li = document.createElement('li');
-
-    li.textContent = this.rebuses[this.step].answer;
-
-    this.answersWrapper.appendChild(li);
   }
 
   hideQuest() {
@@ -195,5 +196,14 @@ export class Quest {
       this.successWrapper.appendChild(title);
       this.successWrapper.appendChild(clue);
     }, 2000);
+  }
+
+  updateProgressBar() {
+    const rebusesCount = this.rebuses.length;
+    const field = document.getElementById('progress-field');
+    const currentProgress = this.step / rebusesCount * 100;
+
+    field.innerText = `${this.step === 0 ? 0 : this.step}/${rebusesCount}`;
+    field.style.width = `${currentProgress}%`;
   }
 }
